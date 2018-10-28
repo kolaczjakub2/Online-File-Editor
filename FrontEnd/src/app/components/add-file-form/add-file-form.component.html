@@ -1,0 +1,25 @@
+<mat-card id="mydiv">
+  <div >
+    <h1 style="text-align: center;margin-top: 2%;">
+      Create your file
+    </h1>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter your file name" name="name" [(ngModel)]="fileInfo.name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter short description" name="description" [(ngModel)]="fileInfo.description">
+    </mat-form-field>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Feel free to fill your file"  name="content" [(ngModel)]="fileInfo.content"></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  <mat-card-actions>
+    <div fxLayoutAlign="space-around center">
+      <button mat-raised-button (click)="saveFile()"> Save File</button>
+      <button mat-raised-button> Cancel</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+

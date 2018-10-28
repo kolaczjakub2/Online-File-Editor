@@ -1,0 +1,17 @@
+#mydiv {
+  position:fixed;
+  top: 40%;
+  left: 45%;
+  width:50%;
+
+  margin-top: -9em; /*set to a negative number 1/2 of your height*/
+  margin-left: -25em; /*set to a negative number 1/2 of your width*/
+  border: 1px solid #ccc;
+  background-color: #f3f3f3;
+}
+.example-full-width {
+  width: 100%;
+}
+/deep/ mat-card-header-text{
+  width: 2000px;
+}

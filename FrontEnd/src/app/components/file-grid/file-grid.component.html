@@ -1,0 +1,47 @@
+<div style="margin: 5%">
+  <table mat-table
+         [dataSource]="dataSource" multiTemplateDataRows
+         class="mat-elevation-z8"
+         style="background-color: whitesmoke ">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <th mat-header-cell *matHeaderCellDef> {{column}}</th>
+      <td mat-cell *matCellDef="let element">
+        {{element[column]}}
+      </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+        <div class="example-element-detail"
+             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <mat-card style="background-color: lightgrey;width: 100%;margin-bottom: 10px">
+            <mat-card-header>
+              <mat-card-title>Created By: {{expandedElement.createdBy}}</mat-card-title>
+              <mat-card-subtitle>Created Date: {{expandedElement.createdDate}}</mat-card-subtitle>
+            </mat-card-header>
+            Description : {{expandedElement.description}}
+            <button mat-fab color="primary" [routerLink]="['/file',expandedElement.id ]">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </mat-card>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expand(element)">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <mat-paginator style="background-color: whitesmoke " [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+</div>
+
+
+<button routerLink="/file/add" mat-fab color="primary">
+  <mat-icon>add</mat-icon>
+</button>

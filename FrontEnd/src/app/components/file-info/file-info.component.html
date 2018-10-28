@@ -1,0 +1,43 @@
+<mat-card id="mydiv">
+  <div>
+    <span >Created By: {{fullFileInfo.createdBy}}</span>
+    <span style="float:right; "> Created Date: {{fullFileInfo.createdDate}}</span>
+  </div>
+  <div>
+    <span >Modified By: {{fullFileInfo.modifiedBy}}</span>
+    <span style="float:right;"> Modified Date: {{fullFileInfo.modifiedDate}}</span>
+  </div>
+  <div>
+    <span>Version : {{fullFileInfo.version}}</span>
+    <span style="float:right;"> Size : {{fullFileInfo.size}}</span>
+  </div>
+  <mat-divider></mat-divider>
+  <div style="padding-top: 10px">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter your file name" name="name" style="width:80%" [(ngModel)]="fullFileInfo.name"
+             [disabled]="!name.checked">
+      <mat-slide-toggle #name>Edit</mat-slide-toggle>
+
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Enter short description" name="description" style="width:80%"
+             [(ngModel)]="fullFileInfo.description" [disabled]="!description.checked">
+      <mat-slide-toggle #description>Edit</mat-slide-toggle>
+
+    </mat-form-field>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Feel free to fill your file" name="content" style="width:80%"
+                  [(ngModel)]="fullFileInfo.content" [disabled]="!content.checked"></textarea>
+        <mat-slide-toggle #content>Edit</mat-slide-toggle>
+
+      </mat-form-field>
+    </form>
+  </div>
+  <mat-card-actions>
+    <div fxLayoutAlign="space-around center">
+      <button mat-raised-button (click)="saveFile()"> Save File</button>
+      <button mat-raised-button> Cancel</button>
+    </div>
+  </mat-card-actions>
+
