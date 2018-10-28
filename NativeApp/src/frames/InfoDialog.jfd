@@ -1,0 +1,113 @@
+JFDML JFormDesigner: "6.0.4.1.172" Java: "1.8.0_152-release" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:31:p, par l:::p {comp label15:::::x, comp label14:::::x, comp label13:::::x, seq {comp label8:::p:70:p, space :::p, comp label9:::::x}, seq {comp label1:::p::p, space u:::p, comp label2:::p:65:p}, seq {comp label5:::p::p, space :::p, comp label10:::::x}}, space s:::p, par l {seq {comp label11:::p:81:p, space :::p, comp label12:::::x}, seq t {par t {comp textField2::::197:x, comp textField1::::197:x, comp scrollPane1::l::197:x}, space s:::p, par l {comp checkBox2:::p::p, comp checkBox1:::p::p, comp checkBox3::l:p::p}}, seq l {par t:::p {comp label3:::::x, comp label6:::::x}, par l {seq {space :p:8:p, comp label4::::169:x}, seq {space :::p, comp label7::::171:x}}}}, space :::p}, seq l {space :p:63:p, comp button1:::p::p, space :p:135:p, comp button2:::p::p, space :0:99:x}}"
+			"$verticalGroup": "par l {seq l {space :p:15:p, par l {comp label1:::p::p, par b {comp label2::b:p::p, comp label3::b:p::p, comp label4::b:p::p}}, space s:::p, par l {par b {comp label6::b:p::p, comp label7::b:p::p}, par b:l {comp label5::b:p::p, comp label10::b:p::p}}, space u:::p, par b {comp label8::b:p::p, comp label9::b:p::p, comp label11::l:p::p, comp label12::b:p::p}, space :p:25:p, par b {comp label13::b:p::p, comp textField1::b:p::p, comp checkBox3::b:p::p}, space :::p, par b {comp label14::b:p::p, comp textField2::b:p::p, comp checkBox1::b:p::p}, par l {seq {space u:::p, par b {comp label15::b:p::p, comp scrollPane1::b:p:54:p}}, seq l {space :p:34:p, comp checkBox2:::p::p}}, space ::30:x, par b {comp button1::b:p::p, comp button2::b:p::p}, space :p:33:p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Created By :"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Created Date : "
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "Modified By :"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "Modified Date: "
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label8"
+				"text": "Version : "
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label9"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label10"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label11"
+				"text": "Size :"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label12"
+				"text": "text"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label13"
+				"text": "Enter File Name :"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBox1"
+				"text": "Edit"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "checkBox1ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label14"
+				"text": "Enter File Description"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField2"
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBox2"
+				"text": "Edit"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "checkBox2ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label15"
+				"text": "Enter File Content"
+			} )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "textArea1"
+				} )
+			} )
+			add( new FormComponent( "javax.swing.JCheckBox" ) {
+				name: "checkBox3"
+				"text": "Edit"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "checkBox3ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Save"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button1ActionPerformed", true ) )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Cancel"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "button2ActionPerformed", true ) )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 455, 375 )
+		} )
+	}
+}
