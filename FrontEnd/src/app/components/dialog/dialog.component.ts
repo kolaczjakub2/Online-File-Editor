@@ -1,23 +1,22 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
-
 @Component({
-  selector: 'dialog',
-  templateUrl: 'dialog.component.html',
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent{
+export class DialogComponent implements OnInit {
+
+  nickname: String = '';
 
   constructor(
-    public dialogRef: MatDialogRef<DialogComponent>) {
+    public dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+
+  ngOnInit() {
   }
 
-  onYesClick() {
-    console.log('usun w pizdu');
-    this.dialogRef.close();
-  }
 }

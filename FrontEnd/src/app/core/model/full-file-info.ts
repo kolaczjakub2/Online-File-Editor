@@ -9,4 +9,6 @@ export class FullFileInfo {
   description: string;
   content: string;
   size: string;
+  isEditing: boolean;
+  editedBy: string;
 }

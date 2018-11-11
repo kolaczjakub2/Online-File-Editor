@@ -14,9 +14,14 @@ import {DialogComponent} from './components/dialog/dialog.component';
 import {AddFileFormComponent} from './components/add-file-form/add-file-form.component';
 import {FileInfoComponent} from './components/file-info/file-info.component';
 import {CommonModule} from '@angular/common';
+import {ChatComponent} from './components/chat/chat.component';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 
 const appRoutes: Routes = [
   {
+    path: 'chat',
+    component: ChatComponent
+  }, {
     path: 'file',
     children: [
       {path: 'all', component: FileGridComponent},
@@ -24,7 +29,7 @@ const appRoutes: Routes = [
       {path: ':id', component: FileInfoComponent}
     ]
   },
-  {path:'**',redirectTo:'/file/all'}
+  {path: '**', redirectTo: '/file/all'}
 
 ];
 
@@ -34,11 +39,13 @@ const appRoutes: Routes = [
     FileGridComponent,
     DialogComponent,
     AddFileFormComponent,
-    FileInfoComponent
+    FileInfoComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    TextareaAutosizeModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,

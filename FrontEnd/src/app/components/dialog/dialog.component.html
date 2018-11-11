@@ -1,9 +1,8 @@
-cipa
-
-<div mat-dialog-content>
-Are you sure you want to delete this file?
-</div>
+<h1 mat-dialog-title>Enter Your Nickname</h1>
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Nickname" [(ngModel)]="nickname">
+  </mat-form-field>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No </button>
-  <button mat-button (click)="onYesClick()">Yes</button>
+  <button mat-raised-button [mat-dialog-close]="nickname" cdkFocusInitial>Ok</button>
 </div>

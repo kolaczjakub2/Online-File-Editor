@@ -8,4 +8,7 @@ export class FileInfo {
   name: string;
   size: number;
   description: string;
+  isEditing:boolean;
+  editedBy:string;
+
 }

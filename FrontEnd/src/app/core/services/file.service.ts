@@ -8,7 +8,7 @@ import {FullFileInfo} from '../model/full-file-info';
   providedIn: 'root'
 })
 export class FileService {
-  private url = 'http://localhost:8080/files';
+  private url = 'http://192.168.1.9:8080/files';
 
   constructor(private http: HttpClient) {
   }
@@ -27,5 +27,13 @@ export class FileService {
 
   updateFile(fullFileInfo: FullFileInfo) {
     return this.http.put(this.url + '/' + fullFileInfo.id, fullFileInfo);
+  }
+
+  addToChat(name: string) {
+    return this.http.post(this.url + `/chat/${name}`, null);
+  }
+
+  getChatUsers() {
+    return this.http.get(this.url + `/chat`,);
   }
 }

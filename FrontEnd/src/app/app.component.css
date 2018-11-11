@@ -1,0 +1,6 @@
+#north    { margin:0;  padding:1em;  }
+#south    { margin:0;  padding:1em;  }
+#east     { margin:0;  padding:1em;  width:6em; height:22em; float:left; margin-right:1.1em }
+#west     { margin:0;  padding:1em;  width:20vw; float:right; margin-left:1.1em }
+#center   { margin:0;  padding:1em;width:75vw;   padding-bottom:0em; }
+#center:after    { content:' '; clear:both; display:block; height:0; overflow:hidden }

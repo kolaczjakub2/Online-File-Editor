@@ -5,6 +5,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
 import {formatDate} from '@angular/common';
+import {WebSocketService} from '../../core/services/web-socket.service';
 
 @Component({
   selector: 'app-file-grid',
@@ -21,23 +22,30 @@ import {formatDate} from '@angular/common';
 export class FileGridComponent implements OnInit {
 
   dataSource;
-  columnsToDisplay = ['name', 'version', 'modifiedBy', 'modifiedDate', 'size'];
+  columnsToDisplay = ['name', 'version', 'modifiedBy', 'modifiedDate', 'size','isEditing'];
   expandedElement = new FileInfo();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fileService: FileService, public dialog: MatDialog) {
+  constructor(private fileService: FileService,  private webSocketService: WebSocketService) {
   }
 
   ngOnInit() {
+    this.getFiles();
+    this.webSocketService.newFile.subscribe(() => this.getFiles());
+    this.webSocketService.blockFile.subscribe(() => this.getFiles());
+    this.webSocketService.unblockFile.subscribe(() => this.getFiles());
+  }
+
+  private getFiles() {
     this.fileService.getFileInfo().subscribe((res: FileInfo[]) => {
       res.forEach(value => {
-        value.modifiedDate = formatDate(value.modifiedDate, 'dd-MM-yyyy hh:mm:ss a','en-US')
-        value.createdDate = formatDate(value.createdDate, 'dd-MM-yyyy hh:mm:ss a','en-US')
+        value.modifiedDate = formatDate(value.modifiedDate, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
+        value.createdDate = formatDate(value.createdDate, 'dd-MM-yyyy hh:mm:ss a', 'en-US');
       });
       this.dataSource = new MatTableDataSource<FileInfo>(res);
       this.dataSource.paginator = this.paginator;
+      console.log(res);
     });
-
   }
 
   expand(element) {
@@ -47,18 +55,4 @@ export class FileGridComponent implements OnInit {
       this.expandedElement = element;
   }
 
-  delete() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  isDate(elementElement: any) {
-    console.log(elementElement instanceof Date);
-    return elementElement instanceof Date;
-  }
 }
