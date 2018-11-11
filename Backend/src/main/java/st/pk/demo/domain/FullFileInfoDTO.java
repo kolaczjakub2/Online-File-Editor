@@ -21,4 +21,6 @@ public class FullFileInfoDTO {
     private String description;
     private String content;
     private String size;
+    private Boolean isEditing;
+    private String editedBy;
 }

@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("Duplicates")
 public class FileInfoMapper {
 
     @Value("${filesPath}")
@@ -22,11 +23,13 @@ public class FileInfoMapper {
         FileInfo fileInfo = new FileInfo();
         fileInfo.setName(createdFileInfoDTO.getName());
         fileInfo.setDescription(createdFileInfoDTO.getDescription());
+        fileInfo.setVersion(createdFileInfoDTO.getVersion());
         return fileInfo;
     }
 
     public static FileInfoGridDTO fromEntityToFileInfoGridDTO(FileInfo fileInfo) {
         FileInfoGridDTO fileInfoGridDTO = new FileInfoGridDTO();
+        fileInfoGridDTO.setIsEditing(fileInfo.getIsEditing());
         fileInfoGridDTO.setCreatedBy(fileInfo.getCreatedBy());
         fileInfoGridDTO.setCreatedDate(new Date(fileInfo.getCreatedDate()));
         fileInfoGridDTO.setModifiedBy(fileInfo.getModifiedBy());
@@ -37,11 +40,21 @@ public class FileInfoMapper {
         fileInfoGridDTO.setDescription(fileInfo.getDescription());
         String filePath = "/files" + "/" + fileInfo.getId().toString();
         fileInfoGridDTO.setSize(String.format("%.2f", new File(filePath).length() / 1024.0) + " KB");
+        try {
+            List<String> list = Files.readAllLines(Paths.get(filePath));
+            final String[] content = {""};
+            list.forEach(s -> content[0] = content[0] + s + "\n");
+            fileInfoGridDTO.setContent(content[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        fileInfoGridDTO.setEditedBy(fileInfo.getEditedBy());
         return fileInfoGridDTO;
     }
 
     public static FullFileInfoDTO fromEntityToFullFileInfoDTO(FileInfo fileInfo) {
         FullFileInfoDTO fullFileInfoDTO = new FullFileInfoDTO();
+        fullFileInfoDTO.setIsEditing(fileInfo.getIsEditing());
         fullFileInfoDTO.setCreatedBy(fileInfo.getCreatedBy());
         fullFileInfoDTO.setCreatedDate(new Date(fileInfo.getCreatedDate()));
         fullFileInfoDTO.setModifiedBy(fileInfo.getModifiedBy());
@@ -54,12 +67,13 @@ public class FileInfoMapper {
         fullFileInfoDTO.setSize(String.format("%.2f", new File(filePath).length() / 1024.0) + " KB");
         try {
             List<String> list = Files.readAllLines(Paths.get(filePath));
-            final String[] content = new String[1];
+            final String[] content = {""};
             list.forEach(s -> content[0] = content[0] + s + "\n");
             fullFileInfoDTO.setContent(content[0]);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        fullFileInfoDTO.setEditedBy(fileInfo.getEditedBy());
         return fullFileInfoDTO;
     }
 

@@ -20,4 +20,7 @@ public class FileInfoGridDTO {
     private String size;
     private String description;
     private UUID id;
+    private Boolean isEditing;
+    private String content;
+    private String editedBy;
 }

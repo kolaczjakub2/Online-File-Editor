@@ -11,4 +11,5 @@ public class CreatedFileInfoDTO {
     private String name;
     private String description;
     private String content;
+    private Long version;
 }

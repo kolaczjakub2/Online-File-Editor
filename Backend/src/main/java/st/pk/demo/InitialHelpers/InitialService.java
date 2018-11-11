@@ -19,14 +19,16 @@ public class InitialService {
         this.fileService = fileService;
     }
 
-    @PostConstruct
+    //@PostConstruct
     private void init() {
         for (int i = 0; i < 20; i++) {
             FileInfo fileInfo = new FileInfo();
-            fileInfo.setName("Pliki z serwera "+i);
+            fileInfo.setName("Pliki z serwera " + i);
             fileInfo.setDescription("j/w");
+            fileInfo.setVersion(0L);
+            fileInfo.setIsEditing(i % 2 == 0);
             fileInfo = fileInfoRepository.save(fileInfo);
-            fileService.createFile(fileInfo, "Nie wiem"+i);
+            fileService.createFile(fileInfo, "Nie wiem" + i);
         }
     }
 }

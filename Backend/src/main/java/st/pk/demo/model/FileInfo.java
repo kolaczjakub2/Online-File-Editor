@@ -38,10 +38,13 @@ public class FileInfo {
     @LastModifiedDate
     Long modifiedDate;
 
-    @Version
     Long version;
 
     String name;
 
     String description;
+
+    Boolean isEditing=Boolean.FALSE;
+
+    String editedBy;
 }
