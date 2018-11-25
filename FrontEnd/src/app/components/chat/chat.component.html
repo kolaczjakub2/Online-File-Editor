@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-form-field>
+    <mat-select placeholder="To" #select (click)="getChatUsers()" [(ngModel)]="to">
+      <mat-option *ngFor="let user of users" [value]="user">
+        {{ user }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput id="input" type="text" placeholder="Message" #input>
+  </mat-form-field>
+
+  <button mat-raised-button [disabled]="!to" (click)="sendMessage(input.value)">Send</button>
+  <div style="width: 100%;height:60vh">
+  <mat-form-field>
+    <textarea id="textarea" matInput disabled cols="30" #textarea> {{messages}}</textarea>
+  </mat-form-field>
+  </div>
+</mat-card>
