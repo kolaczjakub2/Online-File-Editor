@@ -27,7 +27,7 @@ public class RequestJobs extends TimerTask {
     }
 
     public void run() {
-        if (checkServerConnection()) {
+        if (!FileInfoService.offline) {
             filesToCreate.forEach(uuid -> {
                 FullFileInfoDTO file = fileService.getOne(uuid);
                 CreatedFileInfoDTO createdFile = new CreatedFileInfoDTO();
@@ -56,16 +56,5 @@ public class RequestJobs extends TimerTask {
             System.out.println("nie ma polaczenia z serwerem");
         }
 
-    }
-
-    private Boolean checkServerConnection() {
-        HttpClient client = new DefaultHttpClient();
-        HttpGet request = new HttpGet(url);
-        try {
-            HttpResponse response = client.execute(request);
-            return Boolean.TRUE;
-        } catch (IOException e) {
-            return Boolean.FALSE;
-        }
     }
 }

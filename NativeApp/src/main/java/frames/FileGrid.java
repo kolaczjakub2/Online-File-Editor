@@ -36,6 +36,7 @@ public class FileGrid extends JPanel implements Observer {
     Object[][] data;
     JButton add;
     JButton refresh;
+    JCheckBox offline;
     JFrame parent;
     List<FileInfoGridDTO> response;
     Boolean opened = Boolean.FALSE;
@@ -75,7 +76,8 @@ public class FileGrid extends JPanel implements Observer {
         WebSocketSubject unblockFileWebSocketSubject = new WebSocketSubject("/unblockFile", "/app/file/unblock", "unblockFile");
         unblockFileWebSocketSubject.attach(this);
 
-}
+    }
+
     private void setDataToTable() {
         data = getAllFiles();
         DefaultTableModel model = new DefaultTableModel();
@@ -106,6 +108,7 @@ public class FileGrid extends JPanel implements Observer {
                             @Override
                             public void windowDeactivated(WindowEvent e) {
                                 super.windowDeactivated(e);
+                                opened = Boolean.FALSE;
                                 setDataToTable();
                             }
                         });
@@ -118,9 +121,10 @@ public class FileGrid extends JPanel implements Observer {
     private void initMyComponents() {
         add = new JButton();
         refresh = new JButton();
+        offline = new JCheckBox();
         add.setText("Add");
         refresh.setText("Refresh");
-
+        offline.setText("Offline");
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,8 +147,15 @@ public class FileGrid extends JPanel implements Observer {
             }
         });
         refresh.addActionListener(e -> setDataToTable());
+        offline.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FileInfoService.offline = offline.isSelected();
+            }
+        });
         panel1.add(add, BorderLayout.WEST);
         panel1.add(refresh, BorderLayout.EAST);
+        panel1.add(offline, BorderLayout.CENTER);
         button2.setEnabled(false);
     }
 

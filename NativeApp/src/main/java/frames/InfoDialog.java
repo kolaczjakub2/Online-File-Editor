@@ -7,6 +7,8 @@ package frames;
 import Domain.BlockFileDTO;
 import Domain.CreatedFileInfoDTO;
 import Domain.FullFileInfoDTO;
+import Domain.Message;
+import com.google.gson.Gson;
 import observers.Observer;
 import service.FileInfoService;
 import websocket.WebSocketSubject;
@@ -80,6 +82,8 @@ public class InfoDialog extends JDialog implements Observer {
             checkBox3.setEnabled(Boolean.TRUE);
         } else if (fullFileInfoDTO.getIsEditing()) {
             checkBox3.setEnabled(Boolean.FALSE);
+        } else {
+            checkBox3.setEnabled(Boolean.TRUE);
         }
         if (isEditedByMe) {
             button1.setEnabled(Boolean.TRUE);
@@ -95,19 +99,15 @@ public class InfoDialog extends JDialog implements Observer {
             BlockFileDTO blockFileDTO = new BlockFileDTO();
             blockFileDTO.setId(uuid.toString());
             blockFileDTO.setName(System.getProperty("nickname"));
-            correct = subjects.get("blockFile").sendMessage(blockFileDTO);
+            subjects.get("blockFile").sendMessage(blockFileDTO);
         } else
-            correct = subjects.get("unblockFile").sendMessage(uuid.toString());
+            subjects.get("unblockFile").sendMessage(uuid.toString());
 
-        if (!correct) {
-            fullFileInfoDTO = fileInfoService.getFile(uuid);
-            initMyComponents();
-        }else{
-            fullFileInfoDTO.setIsEditing(true);
-            initMyComponents();
-        }
 
+        fullFileInfoDTO = fileInfoService.getFile(uuid);
+        initMyComponents();
     }
+
 
     private void unblockFiles() {
         isEditedByMe = false;
@@ -115,6 +115,8 @@ public class InfoDialog extends JDialog implements Observer {
     }
 
     private void button2ActionPerformed(ActionEvent e) {
+        if (isEditedByMe)
+            subjects.get("unblockFile").sendMessage(uuid.toString());
         dispose();
     }
 
@@ -334,6 +336,19 @@ public class InfoDialog extends JDialog implements Observer {
     @Override
     public void update(String type, Object message) {
         fullFileInfoDTO = fileInfoService.getFile(uuid);
+
+        if (type.equals("blockFile")) {
+            String object = new String((byte[]) message);
+            Gson g = new Gson();
+            BlockFileDTO message1 = g.fromJson(object, BlockFileDTO.class);
+            if (!message1.getName().equals(System.getProperty("nickname")) && fullFileInfoDTO.getId().equals(UUID.fromString(message1.getId()))) {
+                button1.setText("Edited by " + message1.getName());
+            }
+        } else if (type.equals("unblockFile")) {
+            String object = new String((byte[]) message);
+            if (fullFileInfoDTO.getId().equals(UUID.fromString(object)))
+                button1.setText("Save");
+        }
         initMyComponents();
     }
 
